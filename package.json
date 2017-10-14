@@ -1,24 +1,26 @@
-{ "name": "pimatic-plugin-template",
-  "description": "The plugin description",
-  "author": "Your Name <you@example.com> (http://your-website)",
-  "main": "my-plugin",
+{ "name": "pimatic-wifiswitch",
+  "description": "Enables custom wifi based switches",
+  "author": "Rick Zwart",
+  "main": "wifiswitch",
   "files": [
-    "my-plugin.coffee",
+    "wifiswitch.coffee",
     "README.md",
-    "my-plugin-config-schema.coffee"
+    "wifiswitch-config-schema.coffee",
+    "device-config-schema.coffee",
+    "LICENSE"
   ],
-  "version": "0.8.0",
-  "homepage": "http://your-plugin-website",
-  "private": true,
+  "version": "0.0.1",
+  "homepage": "https://github.com/pimatic/pimatic-wifiswitch",
   "repository": {
     "type": "git",
-    "url": "git://github.com/pimatic/pimatic-plugin-template.git"
+    "url": "git://github.com/pimatic/pimatic-wifiswitch.git"
   },
-  "configSchema": "my-plugin-config-schema.coffee",
+  "license": "GPL-2.0",
+  "configSchema": "wifiswitch-config-schema.coffee",
   "dependencies": {
   },
   "peerDependencies": {
-    "pimatic": "0.8.*"
+    "pimatic": ">0.8.*"
   },
   "engines": {
     "node": ">0.8.x",

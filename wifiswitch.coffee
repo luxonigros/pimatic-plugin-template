@@ -84,7 +84,7 @@ module.exports = (env) ->
           server.send(msg, 0, msg.length, port, address)
 
     msgCallback: (msg, rinfo) ->
-      env.logger.debug("Message from " + rinfo.address + ":" + rinfo.port + ": " + msg)
+      env.logger.info("Message from " + rinfo.address + ":" + rinfo.port + ": " + msg)
       for dev in @addedDevices
         dev.eventHandler msg.toString(), rinfo.address
 
@@ -112,8 +112,8 @@ module.exports = (env) ->
       if(address == @address)
         env.logger.info("Switched " + (if msg is '1' then "on" else "off"))
         switch msg
-          when "1" then @emit "state", true
-          when "0" then @emit "state", false
+          when "1" then @changeStateTo true
+          when "0" then @changeStateTo false
 
     changeStateTo: (state) ->
       env.logger.info("Switching " + (if state is true then "on" else "off") + "...")
