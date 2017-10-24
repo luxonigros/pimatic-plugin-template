@@ -84,7 +84,7 @@ module.exports = (env) ->
           server.send(msg, 0, msg.length, port, address)
 
     msgCallback: (msg, rinfo) ->
-      env.logger.info("Message from " + rinfo.address + ":" + rinfo.port + ": " + msg)
+      env.logger.debug("Message from " + rinfo.address + ":" + rinfo.port + ": " + msg)
       for dev in @addedDevices
         dev.eventHandler msg.toString(), rinfo.address
 
@@ -109,16 +109,17 @@ module.exports = (env) ->
       super()
 
     eventHandler: (msg, address) ->
-      if(address == @address)
-        env.logger.info("Switched " + (if msg is '1' then "on" else "off"))
+      if address is @address
         switch msg
           when "1" then @changeStateTo true
           when "0" then @changeStateTo false
 
     changeStateTo: (state) ->
-      env.logger.info("Switching " + (if state is true then "on" else "off") + "...")
-      if @_state is state then return Promise.resolve true
-      else return Promise.try( =>
+      if @_state is state
+        return Promise.resolve true
+      else 
+        env.logger.info("Switching " + (if state is true then "on" else "off") + "...")
+        return Promise.try( =>
         @_setState state
         if state is true
           WifiSwitch.pushCommand(@address, @port, "on")
